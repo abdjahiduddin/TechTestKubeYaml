@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       app.deployment.io/name: mongo-deploy
-  serviceName: "mongo-deploy"
   replicas: 1
   template:
     metadata:
