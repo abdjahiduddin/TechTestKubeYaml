@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+  namespace: tech-test
+  labels:
+    app.volume.io/name: mongo-pv
+spec:
+  storageClassName: mongo-user
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/mongo"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvclaim
+  namespace: tech-test
+  labels:
+    app.volume.io/name: mongo-pvclaim
+spec:
+  storageClassName: mongo-user
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

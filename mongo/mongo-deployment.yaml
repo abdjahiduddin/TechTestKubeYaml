@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deploy
+  namespace: tech-test
+  labels:
+    app.deployment.io/name: mongo-deploy
+spec:
+  selector:
+    matchLabels:
+      app.deployment.io/name: mongo-deploy
+  serviceName: "mongo-deploy"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.deployment.io/name: mongo-deploy
+    spec:
+      containers:
+        - name: mongo-deploy
+          image: mongo
+          args: ["--dbpath", "/data/db"]
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secrets
+                  key: username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secrets
+                  key: password
+          volumeMounts:
+            - name: mongo-data-dir
+              mountPath: /data/db
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: mongo-pv-storage
+          persistentVolumeClaim:
+            claimName: mongo-pvclaim
