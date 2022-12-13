@@ -32,6 +32,8 @@ spec:
                 secretKeyRef:
                   name: mongo-secrets
                   key: password
+            - name: MONGO_INITDB_DATABASE
+              value: admin
           volumeMounts:
             - name: mongo-pv-storage
               mountPath: /data/db
