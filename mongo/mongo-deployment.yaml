@@ -33,7 +33,7 @@ spec:
                   name: mongo-secrets
                   key: password
           volumeMounts:
-            - name: mongo-data-dir
+            - name: mongo-pv-storage
               mountPath: /data/db
       terminationGracePeriodSeconds: 10
       volumes:
