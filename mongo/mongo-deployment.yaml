@@ -18,7 +18,6 @@ spec:
       containers:
         - name: mongo-deploy
           image: mongo-auth
-          imagePullPolicy: IfNotPresent
           env:
           - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
