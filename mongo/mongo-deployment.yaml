@@ -17,7 +17,33 @@ spec:
     spec:
       containers:
         - name: mongo-deploy
-          image: mongo
+          image: mongo-auth
+          env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongo-creds
+                key: rootusername
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongo-creds
+                key: rootpassword
+          - name: MONGO_INITDB_DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongo-creds
+                key: dbusername
+          - name: MONGO_INITDB_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongo-creds
+                key: dbpassword
+          - name: MONGO_INITDB_DB_NAME
+            valueFrom:
+              secretKeyRef:
+                name: mongo-creds
+                key: dbname
           ports:
             - containerPort: 27017
           volumeMounts:
