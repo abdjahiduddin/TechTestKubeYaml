@@ -10,6 +10,7 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-  type: ClusterIP
+      nodePort: 31999
+  type: NodePort
   selector:
     app.deployment.io/name: login-deploy
