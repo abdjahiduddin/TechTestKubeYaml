@@ -10,7 +10,6 @@ spec:
     - protocol: TCP
       port: 27017
       targetPort: 27017
-      nodePort: 31999
-  type: NodePort
+  type: ClusterIP
   selector:
     app.deployment.io/name: mongo-deploy
