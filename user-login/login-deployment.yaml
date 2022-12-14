@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login-deploy
+  namespace: tech-test
+  labels:
+    app.deployment.io/name: login-deploy
+spec:
+  selector:
+    matchLabels:
+      app.deployment.io/name: login-deploy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.deployment.io/name: login-deploy
+    spec:
+      containers:
+        - name: login-deploy
+          image: jahiduddin/login-service
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: MONGODB_URI
+              value: "mongodb://jay:toor@10.101.83.224:27017/dealTechTest?authSource=dealTechTest"
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: jwtsecret
+          ports:
+            - containerPort: 80

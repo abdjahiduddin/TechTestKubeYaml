@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: login-service
+  namespace: tech-test
+  labels:
+    app.service.io/name: login-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+      nodePort: 31999
+  type: NodePort
+  selector:
+    app.deployment.io/name: login-deploy
