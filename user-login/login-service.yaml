@@ -8,8 +8,8 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      port: 27017
-      targetPort: 27017
+      port: 80
+      targetPort: 80
       nodePort: 31999
   type: NodePort
   selector:
