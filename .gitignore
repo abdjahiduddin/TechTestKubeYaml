@@ -1,3 +1,3 @@
-./mongo/mongo-secrets.yaml
-./mongo/mongo-init.js
-./mongo/Dockerfile
+mongo/mongo-secrets.yaml
+mongo/mongo-init.js
+mongo/Dockerfile
