@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deploy
+  namespace: tech-test
+  labels:
+    app.deployment.io/name: user-deploy
+spec:
+  selector:
+    matchLabels:
+      app.deployment.io/name: user-deploy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.deployment.io/name: user-deploy
+    spec:
+      containers:
+        - name: user-deploy
+          image: jahiduddin/user-service
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: MONGODB_URI
+              value: "mongodb://jay:toor@10.101.83.224:27017/dealTechTest?authSource=dealTechTest"
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: jwtsecret
+          ports:
+            - containerPort: 80
